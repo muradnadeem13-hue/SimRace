@@ -4,25 +4,23 @@ import java.util.List;
 
 public class SimRace
 {
-    public final int ANZAHL_AUTOS = 5;
-    public final int ANZAHL_RUNDEN = 20;
+    public final int NUM_CARS = 5;
+    public final int NUM_ROUNDS = 30;
 
 
-    static void main(String[] ignoredArgs)
-    {
+    static void main(String[] ignoredArgs) throws InterruptedException {
         (new SimRace()).performRace();
-        System.err.println("-- Hauptthread wird beendet!--");
+        System.err.println("-- Main thread terminated! --");
     }
 
-    public void performRace()
-    {
+    public void performRace() throws InterruptedException {
         List<Car> cars = new ArrayList<>();
 
-        for(int i = 1; i <= ANZAHL_AUTOS; i++)
+        for(int i = 1; i <= NUM_CARS; i++)
         {
-            cars.add(new Car("Wagen " + i, this));
+            cars.add(new Car("Car " + i, this));
         }
-        System.err.println("-- Noch nichts passiert!--");
+        System.err.println("-- Ready to roll!--");
 
 
         for(Car car : cars)
@@ -34,16 +32,16 @@ public class SimRace
             try {
                 car.join();
             } catch (InterruptedException e) {
-                System.err.println("Thread " + Thread.currentThread().getName() + " wurde nicht beendet!");
+                System.err.println("Thread " + Thread.currentThread().getName() + " not terminated!");
             }
         }
 
         Collections.sort(cars);
 
-        System.out.println("**** Endstand nach " + ANZAHL_RUNDEN + " Runden ****");
-        for(int i = 0; i < ANZAHL_AUTOS; i++)
+        System.out.println("**** End result after " + NUM_ROUNDS + " rounds ****");
+        for(int i = 0; i < NUM_CARS; i++)
         {
-            System.out.println("Platz " + (i+1) + ": " +  cars.get(i).toString());
+            System.out.println("Rank " + (i+1) + ": " +  cars.get(i).toString());
         }
     }
 }
