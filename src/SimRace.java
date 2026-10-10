@@ -8,12 +8,12 @@ public class SimRace
     public final int NUM_ROUNDS = 30;
 
 
-    static void main(String[] ignoredArgs) throws InterruptedException {
+    static void main(String[] ignoredArgs) {
         (new SimRace()).performRace();
         System.err.println("-- Main thread terminated! --");
     }
 
-    public void performRace() throws InterruptedException {
+    public void performRace() {
         List<Car> cars = new ArrayList<>();
 
         for(int i = 1; i <= NUM_CARS; i++)
@@ -25,12 +25,12 @@ public class SimRace
 
         for(Car car : cars)
         {
-            car.start();
+            car.start(); // Cars are independent when it comes to finishing the race
         }
         for(Car car: cars)
         {
             try {
-                car.join();
+                car.join(); // Car has completed the race
             } catch (InterruptedException e) {
                 System.err.println("Thread " + Thread.currentThread().getName() + " not terminated!");
             }

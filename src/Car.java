@@ -19,9 +19,10 @@ public class Car extends Thread implements Comparable<Car>
     {
         for(int i=1; i <= caller.NUM_ROUNDS; i++)
         {
+
             totalDriveTime += (long) (100 * Math.random());
             try {
-                Thread.sleep(totalDriveTime / 2);
+                Thread.sleep(totalDriveTime / 2); // After every round, car "takes a break"
             } catch (InterruptedException e) {
                 System.err.println("Sleep interrupted");
             }
